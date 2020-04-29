@@ -49,3 +49,9 @@ extension DataConsumer {
         }
     }
 }
+
+extension Set where Element == ResourceRecord {
+    public subscript(type: DNSRecordType) -> [ResourceRecord] {
+        return filter { $0.data.type == type }
+    }
+}

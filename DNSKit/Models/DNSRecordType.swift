@@ -11,9 +11,14 @@ import Foundation
 public enum DNSRecordType: UInt16, Hashable {
     case a = 1
     case ns = 2
+    case cname = 5
     case soa = 6
+    case mx = 15
     case txt = 16
     case aaaa = 28
+    case srv = 33
+    case any = 255
+    case caa = 257
 }
 
 extension DataConsumer {

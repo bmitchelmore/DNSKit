@@ -37,9 +37,19 @@ extension DataConsumer {
 
     mutating func take() throws -> ResourceRecord {
         let name: DNSString = try take()
-        let type: DNSRecordType = try take()
+        let typeId: UInt16 = try take()
         let `class`: DNSRecordClass = try take()
         let ttl: UInt32 = try take()
+        guard let type = DNSRecordType(rawValue: typeId) else {
+            let len: UInt16 = try take()
+            try drop(len)
+            return ResourceRecord(
+                class: `class`,
+                name: name.string,
+                ttl: ttl,
+                data: .unknown(typeId)
+            )
+        }
         switch type {
         case .a:
             let ip: IPv4Address = try take()
@@ -50,12 +60,22 @@ extension DataConsumer {
                 data: .a(ip)
             )
         case .ns:
+            try drop(2)
             let ns: DNSString = try take()
             return ResourceRecord(
                 class: `class`,
                 name: name.string,
                 ttl: ttl,
                 data: .ns(ns.string)
+            )
+        case .cname:
+            try drop(2)
+            let domain: DNSString = try take()
+            return ResourceRecord(
+                class: `class`,
+                name: name.string,
+                ttl: ttl,
+                data: .cname(domain.string)
             )
         case .soa:
             try drop(2)
@@ -65,6 +85,16 @@ extension DataConsumer {
                 name: name.string,
                 ttl: ttl,
                 data: .soa(soa)
+            )
+        case .mx:
+            try drop(2)
+            let preference: UInt16 = try take()
+            let exchange: DNSString = try take()
+            return ResourceRecord(
+                class: `class`,
+                name: name.string,
+                ttl: ttl,
+                data: .mx(preference, exchange.string)
             )
         case .txt:
             // len is redundant because TXTRecord
@@ -84,6 +114,28 @@ extension DataConsumer {
                 name: name.string,
                 ttl: ttl,
                 data: .aaaa(ip)
+            )
+        case .srv:
+            var components = name.string.components(separatedBy: ".")
+            let service = components.removeFirst()
+            let proto = components.removeFirst()
+            let name = components.joined(separator: ".")
+            let srv: SRVData = try take(service: service, proto: proto)
+            return ResourceRecord(
+                class: `class`,
+                name: name,
+                ttl: ttl,
+                data: .srv(srv)
+            )
+        case .any:
+            throw DNSParseError.invalidRecordType
+        case .caa:
+            let caa: CAAData = try take()
+            return ResourceRecord(
+                class: `class`,
+                name: name.string,
+                ttl: ttl,
+                data: .caa(caa)
             )
         }
     }

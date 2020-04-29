@@ -10,4 +10,6 @@ import Foundation
 
 enum DNSParseError: Error {
     case invalidResponse(UInt16, Error)
+    case invalidRecordType
+    case invalidTagLength
 }
