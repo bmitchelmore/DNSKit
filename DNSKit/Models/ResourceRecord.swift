@@ -86,6 +86,15 @@ extension DataConsumer {
                 ttl: ttl,
                 data: .soa(soa)
             )
+        case .ptr:
+            try drop(2)
+            let ptr: DNSString = try take()
+            return ResourceRecord(
+                class: `class`,
+                name: name.string,
+                ttl: ttl,
+                data: .ptr(ptr.string)
+            )
         case .mx:
             try drop(2)
             let preference: UInt16 = try take()

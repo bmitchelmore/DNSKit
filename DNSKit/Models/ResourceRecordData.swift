@@ -14,6 +14,7 @@ public enum ResourceRecordData: Hashable {
     case ns(String)
     case cname(String)
     case soa(SOAData)
+    case ptr(String)
     case mx(UInt16, String)
     case txt(String)
     case aaaa(IPv6Address)
@@ -32,6 +33,7 @@ extension ResourceRecordData {
         case .mx: return .mx
         case .ns: return .ns
         case .soa: return .soa
+        case .ptr: return .ptr
         case .txt: return .txt
         case .srv: return .srv
         case .unknown: preconditionFailure("Invalid Record Type")

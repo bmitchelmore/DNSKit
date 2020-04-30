@@ -13,6 +13,7 @@ public enum DNSRecordType: UInt16, Hashable {
     case ns = 2
     case cname = 5
     case soa = 6
+    case ptr = 12
     case mx = 15
     case txt = 16
     case aaaa = 28

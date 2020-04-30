@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Network
 
 public enum SRVService: String, Hashable {
     case ldap = "_ldap"
@@ -66,6 +67,12 @@ extension QuestionSection {
     public static func soa(_ name: String) -> QuestionSection {
         return QuestionSection(.soa, name)
     }
+    public static func ptr(_ ip: IPv4Address) -> QuestionSection {
+        return QuestionSection(.ptr, ip.in_addr)
+    }
+    public static func ptr(_ ip: IPv6Address) -> QuestionSection {
+        return QuestionSection(.ptr, ip.in_addr)
+    }
     public static func mx(_ name: String) -> QuestionSection {
         return QuestionSection(.mx, name)
     }
@@ -83,6 +90,29 @@ extension QuestionSection {
     }
     public static func caa(_ name: String) -> QuestionSection {
         return QuestionSection(.caa, name)
+    }
+}
+
+extension IPv4Address {
+    var in_addr: String {
+        let parts = self.rawValue.reversed().map { part in
+            return String(part, radix: 16, uppercase: false)
+        }
+        return parts.joined(separator: ".").appending(".in-addr.arpa")
+    }
+}
+
+extension IPv6Address {
+    var in_addr: String {
+        let parts = self.rawValue.reversed().flatMap { (byte: UInt8) -> [String] in
+            let nl = byte & 0b1111
+            let nr = byte >> 4
+            return [
+                String(nl, radix: 16, uppercase: false),
+                String(nr, radix: 16, uppercase: false)
+            ]
+        }
+        return parts.joined(separator: ".").appending(".ip6.arpa")
     }
 }
 
