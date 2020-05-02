@@ -15,6 +15,7 @@ enum BytePackageError: Error {
 enum BytePackage {
     case bit(Bool)
     case bits(value: UInt8, count: UInt8)
+    case bits16(value: UInt16, count: UInt8)
 }
 
 extension Array where Element == BytePackage {
@@ -33,14 +34,26 @@ extension Array where Element == BytePackage {
                     offset = 0
                 }
             case .bits(value: let value, count: let count):
-                byte <<= count
-                byte |= value
-                offset += count
-                if offset == 8 {
-                    bytes.append(byte)
-                    offset = 0
-                } else if offset > 8 {
-                    throw BytePackageError.invalidBitOffset
+                for bit in value.bits[(8-Int(count))...] {
+                    byte <<= 1
+                    byte |= UInt8(bit == true ? 1 : 0)
+                    offset += 1
+                    if offset == 8 {
+                        bytes.append(byte)
+                        byte = 0
+                        offset = 0
+                    }
+                }
+            case .bits16(value: let value, count: let count):
+                for bit in value.bits[(16-Int(count))...] {
+                    byte <<= 1
+                    byte |= UInt8(bit == true ? 1 : 0)
+                    offset += 1
+                    if offset == 8 {
+                        bytes.append(byte)
+                        byte = 0
+                        offset = 0
+                    }
                 }
             }
         }

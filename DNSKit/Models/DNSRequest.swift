@@ -15,7 +15,29 @@ struct DNSRequest {
     let authority: Set<ResourceRecord>
     let additional: Set<ResourceRecord>
 
-    init(_ questions: QuestionSection...) {
+    init(validating: Bool = false, _ questions: QuestionSection...) {
+        self.questions = Set(questions)
+        self.answers = []
+        self.authority = []
+        if validating {
+            let opt = OPTData(
+                udp_size: 4096,
+                ext_rcode: 0,
+                edns_version: 0,
+                dnssec_ok: true,
+                z: 0
+            )
+            self.additional = [
+                ResourceRecord(
+                    class: .in,
+                    name: "",
+                    ttl: 0,
+                    data: .opt(opt)
+                )
+            ]
+        } else {
+            self.additional = []
+        }
         self.header = DNSHeader(
             id: .random(),
             qr: false,
@@ -24,26 +46,27 @@ struct DNSRequest {
             tc: false,
             rd: true,
             ra: false,
-            z: 0,
+            z: false,
+            ad: false,
+            cd: false,
             rcode: 0,
             qdcount: UInt16(questions.count),
             ancount: 0,
             nscount: 0,
-            arcount: 0
+            arcount: UInt16(additional.count)
         )
-        self.questions = Set(questions)
-        self.answers = []
-        self.authority = []
-        self.additional = []
     }
 }
 
 extension DNSRequest {
     func bytes() throws -> [UInt8] {
-        return [
-            try header.bytes(),
+        return try [
+            header.bytes(),
             questions.map {
                 $0.bytes
+            }.flatMap { $0 },
+            additional.map {
+                try $0.bytes()
             }.flatMap { $0 }
         ].flatMap { $0 }
     }

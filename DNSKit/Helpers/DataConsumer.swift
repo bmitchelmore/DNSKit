@@ -57,7 +57,34 @@ struct DataConsumer {
     }
 
     mutating func take<I: BinaryInteger>(bits count: I) throws -> UInt8 {
-        let result = try peek(bits: count)
+        let result: UInt8 = try peek(bits: count)
+        try drop(bits: count)
+        return result
+    }
+
+    func peek<I: BinaryInteger>(bits count: I) throws -> UInt16 {
+        let end = bitOffset + Int(count)
+        guard end <= 16 else {
+            throw ConsumerError.invalidBitOffset
+        }
+        guard offset + (end / 8) < data.count else {
+            throw ConsumerError.outOfBounds
+        }
+        let bytes: UInt16 = try {
+            if end <= 8 {
+                let byte = data[offset]
+                return UInt16(byte)
+            } else {
+                let bytes = Data(data[offset...(offset+1)])
+                return try UInt16(networkBytes: bytes)
+            }
+        }()
+        let value = (bytes << bitOffset) >> (16 - count)
+        return value
+    }
+
+    mutating func take<I: BinaryInteger>(bits count: I) throws -> UInt16 {
+        let result: UInt16 = try peek(bits: count)
         try drop(bits: count)
         return result
     }
@@ -81,16 +108,12 @@ struct DataConsumer {
     }
 
     mutating func drop<I: BinaryInteger>(bits count: I) throws {
-        let end = bitOffset + Int(count)
-        guard end <= 8 else {
-            throw ConsumerError.invalidBitOffset
-        }
-        if end == 8 {
-            bitOffset = 0
+        var end = bitOffset + Int(count)
+        while end >= 8 {
+            end -= 8
             try drop(1)
-        } else {
-            bitOffset = end
         }
+        bitOffset = end
     }
 
     mutating func drop<I: BinaryInteger>(_ count: I) throws {
@@ -102,6 +125,13 @@ struct DataConsumer {
         return try DataConsumer(
             data: data,
             startOffset: Int(offset)
+        )
+    }
+
+    func spinoff() throws -> DataConsumer {
+        return try DataConsumer(
+            data: data,
+            startOffset: offset
         )
     }
 }

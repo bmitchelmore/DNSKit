@@ -16,7 +16,9 @@ struct DNSHeader {
     let tc: Bool
     let rd: Bool
     let ra: Bool
-    let z: UInt8 // 3 bits
+    let z: Bool
+    let ad: Bool
+    let cd: Bool
     let rcode: UInt8 // 4 bits
     let qdcount: UInt16
     let ancount: UInt16
@@ -33,7 +35,9 @@ extension DNSHeader {
             .bit(tc),
             .bit(rd),
             .bit(ra),
-            .bits(value: z, count: 3),
+            .bit(z),
+            .bit(ad),
+            .bit(cd),
             .bits(value: rcode, count: 4)
         ]
     }
@@ -59,7 +63,9 @@ extension DataConsumer {
             let tc: Bool = try take()
             let rd: Bool = try take()
             let ra: Bool = try take()
-            let z: UInt8 = try take(bits: 3)
+            let z: Bool = try take()
+            let ad: Bool = try take()
+            let cd: Bool = try take()
             let rcode: UInt8 = try take(bits: 4)
             let qdcount: UInt16 = try take()
             let ancount: UInt16 = try take()
@@ -74,6 +80,8 @@ extension DataConsumer {
                 rd: rd,
                 ra: ra,
                 z: z,
+                ad: ad,
+                cd: cd,
                 rcode: rcode,
                 qdcount: qdcount,
                 ancount: ancount,

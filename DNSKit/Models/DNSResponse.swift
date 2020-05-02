@@ -20,7 +20,8 @@ extension DataConsumer {
     mutating func take() throws -> DNSResponse {
         let header: DNSHeader = try take()
         do {
-
+            logger.debug("Parsing Response for Query \(String(header.id, radix: 16, uppercase: false))")
+            
             let questions: [QuestionSection] = try (0..<header.qdcount).map { _ in
                 return try take()
             }

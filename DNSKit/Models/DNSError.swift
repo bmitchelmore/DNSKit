@@ -12,4 +12,6 @@ enum DNSError: Error {
     case timeout
     case missingResponse
     case invalidResponse
+    case invalidAlgorithm
+    case invalidDigest
 }

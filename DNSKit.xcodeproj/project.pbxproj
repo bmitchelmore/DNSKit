@@ -7,12 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E208AD38245D221C0061857C /* DNSKEYData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E208AD37245D221C0061857C /* DNSKEYData.swift */; };
+		E208AD3A245D25550061857C /* DNSSECAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E208AD39245D25540061857C /* DNSSECAlgorithm.swift */; };
+		E208AD3D245D29BF0061857C /* DNSSECPublicKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E208AD3C245D29BF0061857C /* DNSSECPublicKey.swift */; };
+		E208AD3F245D396D0061857C /* DSData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E208AD3E245D396D0061857C /* DSData.swift */; };
+		E208AD41245D3A1A0061857C /* DNSSECDigest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E208AD40245D3A1A0061857C /* DNSSECDigest.swift */; };
 		E21219232450E93E008F8250 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21219222450E93E008F8250 /* main.swift */; };
 		E21219372450E966008F8250 /* DNSKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E212192E2450E966008F8250 /* DNSKit.framework */; };
 		E212193C2450E966008F8250 /* DNSKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E212193B2450E966008F8250 /* DNSKitTests.swift */; };
 		E212193E2450E966008F8250 /* DNSKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E21219302450E966008F8250 /* DNSKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E21219462450E974008F8250 /* DNS.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21219452450E974008F8250 /* DNS.swift */; };
-		E212194A2450EA21008F8250 /* DNSKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E212192E2450E966008F8250 /* DNSKit.framework */; };
 		E212194D24523834008F8250 /* Delayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E212194C24523834008F8250 /* Delayer.swift */; };
 		E212194F245238A3008F8250 /* NetworkOrderBytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E212194E245238A3008F8250 /* NetworkOrderBytes.swift */; };
 		E2121951245238CF008F8250 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2121950245238CF008F8250 /* Logger.swift */; };
@@ -41,6 +45,11 @@
 		E2FFC6912456ADA60031A5C6 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E2FFC6902456ADA60031A5C6 /* libresolv.tbd */; };
 		E2FFC69324587CC50031A5C6 /* CAAData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FFC69224587CC50031A5C6 /* CAAData.swift */; };
 		E2FFC6972459384E0031A5C6 /* SRVData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FFC6962459384E0031A5C6 /* SRVData.swift */; };
+		E2FFC699245A87540031A5C6 /* OPTData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FFC698245A87540031A5C6 /* OPTData.swift */; };
+		E2FFC69B245A928A0031A5C6 /* DNSRequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FFC69A245A928A0031A5C6 /* DNSRequestError.swift */; };
+		E2FFC69D245BB3950031A5C6 /* RRSIGData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FFC69C245BB3950031A5C6 /* RRSIGData.swift */; };
+		E2FFC6A5245BF9150031A5C6 /* DNSKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E212192E2450E966008F8250 /* DNSKit.framework */; };
+		E2FFC6AC245BFA2F0031A5C6 /* DNSKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E212192E2450E966008F8250 /* DNSKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,9 +79,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		E2FFC6A7245BF9150031A5C6 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E2FFC6AC245BFA2F0031A5C6 /* DNSKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E208AD37245D221C0061857C /* DNSKEYData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSKEYData.swift; sourceTree = "<group>"; };
+		E208AD39245D25540061857C /* DNSSECAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSSECAlgorithm.swift; sourceTree = "<group>"; };
+		E208AD3C245D29BF0061857C /* DNSSECPublicKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSSECPublicKey.swift; sourceTree = "<group>"; };
+		E208AD3E245D396D0061857C /* DSData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSData.swift; sourceTree = "<group>"; };
+		E208AD40245D3A1A0061857C /* DNSSECDigest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSSECDigest.swift; sourceTree = "<group>"; };
 		E212191F2450E93E008F8250 /* DNSLookup */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DNSLookup; sourceTree = BUILT_PRODUCTS_DIR; };
 		E21219222450E93E008F8250 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		E212192E2450E966008F8250 /* DNSKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DNSKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,6 +137,9 @@
 		E2FFC6902456ADA60031A5C6 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		E2FFC69224587CC50031A5C6 /* CAAData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAAData.swift; sourceTree = "<group>"; };
 		E2FFC6962459384E0031A5C6 /* SRVData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRVData.swift; sourceTree = "<group>"; };
+		E2FFC698245A87540031A5C6 /* OPTData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OPTData.swift; sourceTree = "<group>"; };
+		E2FFC69A245A928A0031A5C6 /* DNSRequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSRequestError.swift; sourceTree = "<group>"; };
+		E2FFC69C245BB3950031A5C6 /* RRSIGData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RRSIGData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,7 +148,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2FFC6912456ADA60031A5C6 /* libresolv.tbd in Frameworks */,
-				E212194A2450EA21008F8250 /* DNSKit.framework in Frameworks */,
+				E2FFC6A5245BF9150031A5C6 /* DNSKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,6 +170,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E208AD3B245D25580061857C /* DNSSEC */ = {
+			isa = PBXGroup;
+			children = (
+				E2FFC69C245BB3950031A5C6 /* RRSIGData.swift */,
+				E208AD37245D221C0061857C /* DNSKEYData.swift */,
+				E208AD39245D25540061857C /* DNSSECAlgorithm.swift */,
+				E208AD3C245D29BF0061857C /* DNSSECPublicKey.swift */,
+				E208AD3E245D396D0061857C /* DSData.swift */,
+				E208AD40245D3A1A0061857C /* DNSSECDigest.swift */,
+			);
+			path = DNSSEC;
+			sourceTree = "<group>";
+		};
 		E21219162450E93D008F8250 = {
 			isa = PBXGroup;
 			children = (
@@ -208,6 +249,7 @@
 		E2FFC668245699F80031A5C6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E208AD3B245D25580061857C /* DNSSEC */,
 				E21219542452395F008F8250 /* DNSError.swift */,
 				E2FFC66924569A010031A5C6 /* TXTRecord.swift */,
 				E2FFC66B24569A240031A5C6 /* DNSString.swift */,
@@ -224,6 +266,8 @@
 				E2FFC6852456A7C20031A5C6 /* SOAData.swift */,
 				E2FFC69224587CC50031A5C6 /* CAAData.swift */,
 				E2FFC6962459384E0031A5C6 /* SRVData.swift */,
+				E2FFC698245A87540031A5C6 /* OPTData.swift */,
+				E2FFC69A245A928A0031A5C6 /* DNSRequestError.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -272,6 +316,7 @@
 				E212191B2450E93E008F8250 /* Sources */,
 				E212191C2450E93E008F8250 /* Frameworks */,
 				E212191D2450E93E008F8250 /* CopyFiles */,
+				E2FFC6A7245BF9150031A5C6 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -279,6 +324,8 @@
 				E21219482450EA1D008F8250 /* PBXTargetDependency */,
 			);
 			name = DNSLookup;
+			packageProductDependencies = (
+			);
 			productName = DNSLookup;
 			productReference = E212191F2450E93E008F8250 /* DNSLookup */;
 			productType = "com.apple.product-type.tool";
@@ -297,6 +344,8 @@
 			dependencies = (
 			);
 			name = DNSKit;
+			packageProductDependencies = (
+			);
 			productName = DNSKit;
 			productReference = E212192E2450E966008F8250 /* DNSKit.framework */;
 			productType = "com.apple.product-type.framework";
@@ -351,6 +400,8 @@
 				Base,
 			);
 			mainGroup = E21219162450E93D008F8250;
+			packageReferences = (
+			);
 			productRefGroup = E21219202450E93E008F8250 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -393,18 +444,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E208AD3F245D396D0061857C /* DSData.swift in Sources */,
 				E2FFC6842456A5CC0031A5C6 /* DNSParseError.swift in Sources */,
 				E2FFC6972459384E0031A5C6 /* SRVData.swift in Sources */,
 				E2FFC68024569C6D0031A5C6 /* DNSResponse.swift in Sources */,
 				E2FFC66C24569A240031A5C6 /* DNSString.swift in Sources */,
 				E2FFC69324587CC50031A5C6 /* CAAData.swift in Sources */,
+				E2FFC699245A87540031A5C6 /* OPTData.swift in Sources */,
 				E212195F2452414B008F8250 /* DataConsumer.swift in Sources */,
 				E212196124524153008F8250 /* DataConsumerExtensions.swift in Sources */,
 				E2FFC67C24569C0E0031A5C6 /* DNSHeader.swift in Sources */,
+				E208AD41245D3A1A0061857C /* DNSSECDigest.swift in Sources */,
 				E21219532452394B008F8250 /* ResultHelpers.swift in Sources */,
 				E2FFC67024569BAD0031A5C6 /* DNSRecordType.swift in Sources */,
 				E21219632452420A008F8250 /* DNSQueue.swift in Sources */,
 				E2FFC67424569BD00031A5C6 /* ResourceRecordData.swift in Sources */,
+				E2FFC69D245BB3950031A5C6 /* RRSIGData.swift in Sources */,
 				E2121959245240E8008F8250 /* Hex.swift in Sources */,
 				E2FFC6822456A0A00031A5C6 /* BytePackage.swift in Sources */,
 				E212194F245238A3008F8250 /* NetworkOrderBytes.swift in Sources */,
@@ -412,9 +467,13 @@
 				E2FFC67A24569BFE0031A5C6 /* ResourceRecord.swift in Sources */,
 				E2FFC67624569BE40031A5C6 /* QuestionSection.swift in Sources */,
 				E2FFC6862456A7C20031A5C6 /* SOAData.swift in Sources */,
+				E208AD38245D221C0061857C /* DNSKEYData.swift in Sources */,
 				E2FFC67E24569C250031A5C6 /* DNSRequest.swift in Sources */,
+				E208AD3D245D29BF0061857C /* DNSSECPublicKey.swift in Sources */,
+				E208AD3A245D25550061857C /* DNSSECAlgorithm.swift in Sources */,
 				E212194D24523834008F8250 /* Delayer.swift in Sources */,
 				E21219462450E974008F8250 /* DNS.swift in Sources */,
+				E2FFC69B245A928A0031A5C6 /* DNSRequestError.swift in Sources */,
 				E2FFC66A24569A010031A5C6 /* TXTRecord.swift in Sources */,
 				E2121951245238CF008F8250 /* Logger.swift in Sources */,
 				E212195D24524134008F8250 /* Bytes.swift in Sources */,

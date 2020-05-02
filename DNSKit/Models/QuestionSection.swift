@@ -91,6 +91,12 @@ extension QuestionSection {
     public static func caa(_ name: String) -> QuestionSection {
         return QuestionSection(.caa, name)
     }
+    public static func dnskey(_ name: String) -> QuestionSection {
+        return QuestionSection(.dnskey, name)
+    }
+    public static func ds(_ name: String) -> QuestionSection {
+        return QuestionSection(.ds, name)
+    }
 }
 
 extension IPv4Address {
@@ -119,7 +125,7 @@ extension IPv6Address {
 extension QuestionSection {
     var bytes: [UInt8] {
         return [
-            name.bytes,
+            DNSString(name).bytes,
             type.rawValue.bytes,
             `class`.rawValue.bytes
         ].flatMap { $0 }

@@ -149,17 +149,139 @@
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.SwiftErrorBreakpoint">
+         <BreakpointContent
+            uuid = "E2E4365B-177C-48DA-94A2-795CC66CE6D9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C5DF44A8-6067-4EFF-9E91-5AEAB44D0A92"
+            uuid = "1CCA6D3F-D813-49D2-8C43-03C720746B3E"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DNSKit/Models/ResourceRecord.swift"
+            filePath = "DNSKit/Models/QuestionSection.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C2B81605-7C47-4001-B9AB-1A9CA7118E7B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DNSKit/Models/DNSResponse.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "take()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DFDBA088-5604-40D3-8241-AF792E42C7B0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DNSKit/Models/DNSHeader.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "DataConsumer"
+            landmarkType = "21">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2BD0927A-ED62-45E7-99C2-A328D379F2E0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            condition = "validating == true"
+            continueAfterRunningActions = "No"
+            filePath = "DNSKit/Models/DNSRequest.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "init(validating:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "677B5838-CFAE-4874-817C-DE9FD58133CD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DNSKit/Helpers/DataConsumer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "peek(bits:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "677B5838-CFAE-4874-817C-DE9FD58133CD - d195a4fa4f687d60"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () throws -&gt; Swift.UInt16 in DNSKit.DataConsumer.peek&lt;A where A: Swift.BinaryInteger&gt;(bits: A) throws -&gt; Swift.UInt16"
+                  moduleName = "DNSKit"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/blair_mitchelmore/git/DNSKit/DNSKit/Helpers/DataConsumer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "79"
+                  endingLineNumber = "79"
+                  offsetFromSymbolStart = "873">
+               </Location>
+               <Location
+                  uuid = "677B5838-CFAE-4874-817C-DE9FD58133CD - d195a4fa4f687d60"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () throws -&gt; Swift.UInt16 in DNSKit.DataConsumer.peek&lt;A where A: Swift.BinaryInteger&gt;(bits: A) throws -&gt; Swift.UInt16"
+                  moduleName = "DNSKit"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/blair_mitchelmore/git/DNSKit/DNSKit/Helpers/DataConsumer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "79"
+                  endingLineNumber = "79"
+                  offsetFromSymbolStart = "1229">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6150CC13-48DE-45BF-B0F2-C2090186A745"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DNSKit/Models/DNSSEC/DNSKEYData.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
             landmarkName = "take()"
             landmarkType = "7">
          </BreakpointContent>

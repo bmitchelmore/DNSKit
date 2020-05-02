@@ -11,11 +11,13 @@ import Network
 
 extension DataConsumer {
     mutating func peek() throws -> Bool {
-        return try peek(bits: 1) == 1
+        let value: UInt8 = try peek(bits: 1)
+        return value == 1
     }
 
     mutating func take() throws -> Bool {
-        return try take(bits: 1) == 1
+        let value: UInt8 = try take(bits: 1)
+        return value == 1
     }
 
     mutating func peek() throws -> UInt8 {

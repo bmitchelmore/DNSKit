@@ -17,6 +17,23 @@ public struct SOAData: Hashable {
     var expire: UInt32
 }
 
+extension SOAData {
+    var bytes: [UInt8] {
+        let bytes = [
+            DNSString(mname).bytes,
+            DNSString(rname).bytes,
+            serial.bytes,
+            refresh.bytes,
+            retry.bytes,
+            expire.bytes
+        ].flatMap { $0 }
+        return [
+            UInt16(bytes.count).bytes,
+            bytes
+        ].flatMap { $0 }
+    }
+}
+
 extension DataConsumer {
     mutating func take() throws -> SOAData {
         let mname: DNSString = try take()

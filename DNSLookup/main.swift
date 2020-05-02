@@ -15,9 +15,9 @@ import Network
 
 let group = DispatchGroup()
 
-func query(_ question: QuestionSection, completion: @escaping (Result<DNSResponse,Error>) -> Void) {
+func query(_ question: QuestionSection, validating: Bool = false, completion: @escaping (Result<DNSResponse,Error>) -> Void) {
     group.enter()
-    dns.query(question) { (result) in
+    dns.query(question, validating: validating) { (result) in
         completion(result)
         group.leave()
     }

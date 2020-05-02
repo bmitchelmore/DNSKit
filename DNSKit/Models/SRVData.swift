@@ -9,16 +9,31 @@
 import Foundation
 
 public struct SRVData: Hashable {
-    var service: String
-    var proto: String
+    var service: SRVService
+    var proto: SRVProto
     var priority: UInt16
     var weight: UInt16
     var port: UInt16
     var target: String
 }
 
+extension SRVData {
+    var bytes: [UInt8] {
+        let bytes = [
+            priority.bytes,
+            weight.bytes,
+            port.bytes,
+            DNSString(target).bytes
+        ].flatMap { $0 }
+        return [
+            UInt16(bytes.count).bytes,
+            bytes
+        ].flatMap { $0 }
+    }
+}
+
 extension DataConsumer {
-    mutating func take(service: String, proto: String) throws -> SRVData {
+    mutating func take(service: SRVService, proto: SRVProto) throws -> SRVData {
         let _: UInt16 = try take()
         let priority: UInt16 = try take()
         let weight: UInt16 = try take()

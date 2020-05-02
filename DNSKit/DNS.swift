@@ -21,7 +21,11 @@ public final class DNS {
     }
 
     public func query(_ query: QuestionSection, completion: @escaping (Result<DNSResponse, Error>) -> Void) {
-        self.queue.schedule(DNSRequest(query), completion: completion)
+        self.query(query, validating: false, completion: completion)
+    }
+
+    public func query(_ query: QuestionSection, validating: Bool, completion: @escaping (Result<DNSResponse, Error>) -> Void) {
+        self.queue.schedule(DNSRequest(validating: validating, query), completion: completion)
     }
 }
 
