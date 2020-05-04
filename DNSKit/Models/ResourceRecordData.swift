@@ -22,6 +22,7 @@ public enum ResourceRecordData: Hashable {
     case srv(SRVData)
     case opt(OPTData)
     case ds(DSData)
+    case nsec(NSECData)
     case rrsig(RRSIGData)
     case dnskey(DNSKEYData)
     case unknown(UInt16)
@@ -42,6 +43,7 @@ extension ResourceRecordData {
         case .srv: return .srv
         case .opt: return .opt
         case .ds: return .ds
+        case .nsec: return .nsec
         case .rrsig: return .rrsig
         case .dnskey: return .dnskey
         case .unknown: preconditionFailure("Invalid Record Type")
@@ -101,6 +103,8 @@ extension ResourceRecordData {
             return TXTRecord(str).bytes
         case .rrsig(let data):
             return data.bytes
+        case .nsec(let data):
+            return try data.bytes()
         case .ds(let data):
             return data.bytes
         case .dnskey(let data):

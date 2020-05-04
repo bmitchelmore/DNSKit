@@ -14,4 +14,5 @@ enum DNSError: Error {
     case invalidResponse
     case invalidAlgorithm
     case invalidDigest
+    case invalidNSECBitmap
 }

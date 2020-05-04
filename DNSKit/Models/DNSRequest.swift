@@ -14,6 +14,10 @@ struct DNSRequest {
     let answers: Set<ResourceRecord>
     let authority: Set<ResourceRecord>
     let additional: Set<ResourceRecord>
+    
+    var validating: Bool {
+        return additional.filter({ $0.data.type == .opt }).count > 0
+    }
 
     init(validating: Bool = false, _ questions: QuestionSection...) {
         self.questions = Set(questions)

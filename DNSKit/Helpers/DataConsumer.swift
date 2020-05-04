@@ -15,32 +15,35 @@ struct DataConsumer {
         case invalidBitOffset
     }
 
-    private let data: Data
-    private var offset: Int
+    let data: Data
+    private(set) var offset: Int
+    private(set) var maxOffset: Int
     private var bitOffset: Int
 
-    var bytesTotal: UInt32
-    var bytesConsumed: UInt32
+    private(set) var bytesTotal: UInt32
+    private(set) var bytesConsumed: UInt32
+    var bytesRemaining: UInt32 {
+        return UInt32(maxOffset - offset)
+    }
 
-    init(data: Data, startOffset: Int = 0) throws {
+    init(data: Data, startOffset: Int = 0, maxOffset: Int? = nil) throws {
         guard startOffset < data.count else {
             throw ConsumerError.outOfBounds
         }
         self.data = data
         self.offset = startOffset
+        self.maxOffset = min(maxOffset ?? data.count, data.count)
         self.bitOffset = 0
         self.bytesTotal = UInt32(data.count)
         self.bytesConsumed = 0
     }
 
     mutating func peek() throws -> Data {
-        let remaining = data.count - offset
-        return try peek(remaining)
+        return try peek(bytesRemaining)
     }
 
     mutating func take() throws -> Data {
-        let remaining = data.count - offset
-        return try take(remaining)
+        return try take(bytesRemaining)
     }
 
     func peek<I: BinaryInteger>(bits count: I) throws -> UInt8 {
@@ -48,7 +51,7 @@ struct DataConsumer {
         guard end <= 8 else {
             throw ConsumerError.invalidBitOffset
         }
-        guard offset < data.count else {
+        guard offset < maxOffset else {
             throw ConsumerError.outOfBounds
         }
         let byte = data[offset]
@@ -67,7 +70,7 @@ struct DataConsumer {
         guard end <= 16 else {
             throw ConsumerError.invalidBitOffset
         }
-        guard offset + (end / 8) < data.count else {
+        guard offset + (end / 8) < maxOffset else {
             throw ConsumerError.outOfBounds
         }
         let bytes: UInt16 = try {
@@ -94,7 +97,7 @@ struct DataConsumer {
             throw ConsumerError.invalidBitOffset
         }
         let end = offset + Int(count)
-        guard end <= data.count else {
+        guard end <= maxOffset else {
             throw ConsumerError.outOfBounds
         }
         let result = data.subdata(in: offset..<end)

@@ -8,6 +8,7 @@
 
 import Foundation
 import Network
+import CryptoKit
 
 private let handlerQueue = DispatchQueue(
     label: "dns-lookup-handler",

@@ -16,4 +16,5 @@ enum DNSParseError: Error {
     case invalidTagLength
     case optValuesNotSupported
     case invalidAlgorithm
+    case invalidWindow
 }

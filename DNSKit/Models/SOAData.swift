@@ -15,6 +15,7 @@ public struct SOAData: Hashable {
     var refresh: UInt32
     var retry: UInt32
     var expire: UInt32
+    var ttl: UInt32
 }
 
 extension SOAData {
@@ -25,7 +26,8 @@ extension SOAData {
             serial.bytes,
             refresh.bytes,
             retry.bytes,
-            expire.bytes
+            expire.bytes,
+            ttl.bytes
         ].flatMap { $0 }
         return [
             UInt16(bytes.count).bytes,
@@ -36,19 +38,24 @@ extension SOAData {
 
 extension DataConsumer {
     mutating func take() throws -> SOAData {
-        let mname: DNSString = try take()
-        let rname: DNSString = try take()
-        let serial: UInt32 = try take()
-        let refresh: UInt32 = try take()
-        let retry: UInt32 = try take()
-        let expire: UInt32 = try take()
-        return SOAData(
-            mname: mname.string,
-            rname: rname.string,
-            serial: serial,
-            refresh: refresh,
-            retry: retry,
-            expire: expire
-        )
+        let len: UInt16 = try take()
+        return try take(len) { consumer in
+            let mname: DNSString = try consumer.take()
+            let rname: DNSString = try consumer.take()
+            let serial: UInt32 = try consumer.take()
+            let refresh: UInt32 = try consumer.take()
+            let retry: UInt32 = try consumer.take()
+            let expire: UInt32 = try consumer.take()
+            let ttl: UInt32 = try consumer.take()
+            return SOAData(
+                mname: mname.string,
+                rname: rname.string,
+                serial: serial,
+                refresh: refresh,
+                retry: retry,
+                expire: expire,
+                ttl: ttl
+            )
+        }
     }
 }

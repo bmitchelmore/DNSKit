@@ -84,6 +84,7 @@ extension DataConsumer {
                 data: .unknown(typeId)
             )
         }
+        logger.debug("Reading \(type) record (\(typeId)) for \(name.string): \(data[offset...].hex)")
         if type == .opt {
             // OPT records are a special case
             // that has a weird binary format
@@ -141,7 +142,6 @@ extension DataConsumer {
                 data: .cname(domain.string)
             )
         case .soa:
-            try drop(2)
             let soa: SOAData = try take()
             return ResourceRecord(
                 class: `class`,
@@ -212,6 +212,14 @@ extension DataConsumer {
                 name: name.string,
                 ttl: ttl,
                 data: .ds(ds)
+            )
+        case .nsec:
+            let nsec: NSECData = try take()
+            return ResourceRecord(
+                class: `class`,
+                name: name.string,
+                ttl: ttl,
+                data: .nsec(nsec)
             )
         case .rrsig:
             let rrsig: RRSIGData = try take()

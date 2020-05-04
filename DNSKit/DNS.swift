@@ -25,7 +25,38 @@ public final class DNS {
     }
 
     public func query(_ query: QuestionSection, validating: Bool, completion: @escaping (Result<DNSResponse, Error>) -> Void) {
-        self.queue.schedule(DNSRequest(validating: validating, query), completion: completion)
+        if validating {
+            let main = DNSRequest(validating: validating, query)
+            let ds = DNSRequest(validating: validating, .ds(query.name))
+            let group = DispatchGroup()
+            var ar: Result<DNSResponse,Error>? = nil
+            var dr: Result<DNSResponse,Error>? = nil
+
+            group.enter()
+            self.queue.schedule(main) { (result) in
+                ar = result
+                group.leave()
+            }
+            
+            group.enter()
+            self.queue.schedule(ds) { (result) in
+                dr = result
+                group.leave()
+            }
+
+            group.notify(queue: .main) {
+                if let a = ar, let ds = dr {
+                    print("A: \(a)")
+                    print("DS: \(ds)")
+                    completion(a)
+                } else {
+                    completion(.failure(DNSError.missingResponse))
+                }
+            }
+        } else {
+            let request = DNSRequest(query)
+            self.queue.schedule(request, completion: completion)
+        }
     }
 }
 

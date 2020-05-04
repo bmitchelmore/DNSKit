@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum DNSRecordType: UInt16, Hashable {
+public enum DNSRecordType: UInt16, CaseIterable, Hashable {
     case a = 1
     case ns = 2
     case cname = 5
@@ -21,6 +21,7 @@ public enum DNSRecordType: UInt16, Hashable {
     case opt = 41
     case ds = 43
     case rrsig = 46
+    case nsec = 47
     case dnskey = 48
     case any = 255
     case caa = 257

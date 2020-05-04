@@ -51,8 +51,7 @@ extension DataConsumer {
     }
 
     mutating func take<T>(_ count: UInt16, processor: (inout DataConsumer) throws -> T) throws -> T {
-        let data = try peek(count)
-        var bytes = try DataConsumer(data: data)
+        var bytes = try DataConsumer(data: data, startOffset: offset, maxOffset: offset + Int(count))
         let result = try processor(&bytes)
         guard count == bytes.bytesConsumed else {
             logger.error(ConsumerError.invalidConversion, "failed to convert \(count) bytes (\(data.hex)) to \(T.self)")
@@ -65,7 +64,7 @@ extension DataConsumer {
     mutating func take<T>(or error: Error, processor: (UInt8) -> T?) throws -> T {
         let byte: UInt8 = try peek()
         guard let result = processor(byte) else {
-            logger.error(error, "failed to convert 1 byte (\(byte)) to \(T.self)")
+            logger.error(error, "failed to convert 1 byte (\(byte.hex)) to \(T.self)")
             throw error
         }
         try drop(1)
@@ -75,7 +74,7 @@ extension DataConsumer {
     mutating func take<T>(or error: Error, processor: (UInt16) -> T?) throws -> T {
         let byte: UInt16 = try peek()
         guard let result = processor(byte) else {
-            logger.error(error, "failed to convert 2 bytes (\(byte)) to \(T.self)")
+            logger.error(error, "failed to convert 2 bytes (\(byte.hex)) to \(T.self)")
             throw error
         }
         try drop(2)

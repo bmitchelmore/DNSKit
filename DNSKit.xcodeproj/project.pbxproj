@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		75AA6A04245FA57E00D24B0C /* NSECData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AA6A03245FA57E00D24B0C /* NSECData.swift */; };
 		E208AD38245D221C0061857C /* DNSKEYData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E208AD37245D221C0061857C /* DNSKEYData.swift */; };
 		E208AD3A245D25550061857C /* DNSSECAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E208AD39245D25540061857C /* DNSSECAlgorithm.swift */; };
 		E208AD3D245D29BF0061857C /* DNSSECPublicKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E208AD3C245D29BF0061857C /* DNSSECPublicKey.swift */; };
@@ -93,6 +94,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		75AA6A03245FA57E00D24B0C /* NSECData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSECData.swift; sourceTree = "<group>"; };
 		E208AD37245D221C0061857C /* DNSKEYData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSKEYData.swift; sourceTree = "<group>"; };
 		E208AD39245D25540061857C /* DNSSECAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSSECAlgorithm.swift; sourceTree = "<group>"; };
 		E208AD3C245D29BF0061857C /* DNSSECPublicKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSSECPublicKey.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				E208AD3C245D29BF0061857C /* DNSSECPublicKey.swift */,
 				E208AD3E245D396D0061857C /* DSData.swift */,
 				E208AD40245D3A1A0061857C /* DNSSECDigest.swift */,
+				75AA6A03245FA57E00D24B0C /* NSECData.swift */,
 			);
 			path = DNSSEC;
 			sourceTree = "<group>";
@@ -460,6 +463,7 @@
 				E21219632452420A008F8250 /* DNSQueue.swift in Sources */,
 				E2FFC67424569BD00031A5C6 /* ResourceRecordData.swift in Sources */,
 				E2FFC69D245BB3950031A5C6 /* RRSIGData.swift in Sources */,
+				75AA6A04245FA57E00D24B0C /* NSECData.swift in Sources */,
 				E2121959245240E8008F8250 /* Hex.swift in Sources */,
 				E2FFC6822456A0A00031A5C6 /* BytePackage.swift in Sources */,
 				E212194F245238A3008F8250 /* NetworkOrderBytes.swift in Sources */,
