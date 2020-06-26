@@ -29,6 +29,99 @@ public enum ResourceRecordData: Hashable {
 }
 
 extension ResourceRecordData {
+    var a: IPv4Address? {
+        if case .a(let data) = self {
+            return data
+        }
+        return nil
+    }
+    var ns: String? {
+        if case .ns(let data) = self {
+            return data
+        }
+        return nil
+    }
+    var cname: String? {
+        if case .cname(let data) = self {
+            return data
+        }
+        return nil
+    }
+    var soa: SOAData? {
+        if case .soa(let data) = self {
+            return data
+        }
+        return nil
+    }
+    var ptr: String? {
+        if case .ptr(let data) = self {
+            return data
+        }
+        return nil
+    }
+    var mx: (UInt16, String)? {
+        if case .mx(let a, let b) = self {
+            return (a, b)
+        }
+        return nil
+    }
+    var txt: String? {
+        if case .txt(let data) = self {
+            return data
+        }
+        return nil
+    }
+    var aaaa: IPv6Address? {
+        if case .aaaa(let data) = self {
+            return data
+        }
+        return nil
+    }
+    var caa: CAAData? {
+        if case .caa(let data) = self {
+            return data
+        }
+        return nil
+    }
+    var srv: SRVData? {
+        if case .srv(let data) = self {
+            return data
+        }
+        return nil
+    }
+    var opt: OPTData? {
+        if case .opt(let data) = self {
+            return data
+        }
+        return nil
+    }
+    var ds: DSData? {
+        if case .ds(let data) = self {
+            return data
+        }
+        return nil
+    }
+    var nsec: NSECData? {
+        if case .nsec(let data) = self {
+            return data
+        }
+        return nil
+    }
+    var rrsig: RRSIGData? {
+        if case .rrsig(let data) = self {
+            return data
+        }
+        return nil
+    }
+    var dnskey: DNSKEYData? {
+        if case .dnskey(let data) = self {
+            return data
+        }
+        return nil
+    }
+}
+
+extension ResourceRecordData {
     var type: DNSRecordType {
         switch self {
         case .a: return .a
@@ -52,49 +145,27 @@ extension ResourceRecordData {
 }
 
 extension ResourceRecordData {
-    func bytes() throws -> [UInt8] {
+    func rdata() throws -> [UInt8] {
         switch self {
         case .a(let addr):
-            return [
-                UInt16(addr.rawValue.count).bytes,
-                addr.rawValue.map { $0 }
-            ].flatMap { $0 }
+            return addr.rawValue.map { $0 }
         case .aaaa(let addr):
-            return [
-                UInt16(addr.rawValue.count).bytes,
-                addr.rawValue.map { $0 }
-            ].flatMap { $0 }
+            return addr.rawValue.map { $0 }
         case .caa(let data):
             return try data.bytes()
         case .cname(let str):
-            let bytes = DNSString(str).bytes
-            return [
-                UInt16(bytes.count).bytes,
-                bytes
-            ].flatMap { $0 }
+            return DNSString(str).bytes
         case .mx(let pref, let str):
-            let bytes = [
+            return [
                 pref.bytes,
                 DNSString(str).bytes
             ].flatMap { $0 }
-            return [
-                UInt16(bytes.count).bytes,
-                bytes
-            ].flatMap { $0 }
         case .ns(let str):
-            let bytes = DNSString(str).bytes
-            return [
-                UInt16(bytes.count).bytes,
-                bytes
-            ].flatMap { $0 }
+            return DNSString(str).bytes
         case .opt(let data):
             return try data.bytes()
         case .ptr(let str):
-            let bytes = DNSString(str).bytes
-            return [
-                UInt16(bytes.count).bytes,
-                bytes
-            ].flatMap { $0 }
+            return DNSString(str).bytes
         case .soa(let data):
             return data.bytes
         case .srv(let data):
@@ -112,6 +183,12 @@ extension ResourceRecordData {
         case .unknown(let type):
             throw DNSRequestError.unknownType(type)
         }
-
+    }
+    func bytes() throws -> [UInt8] {
+        let data = try rdata()
+        return [
+            UInt16(data.count).bytes,
+            data
+        ].flatMap { $0 }
     }
 }

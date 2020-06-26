@@ -16,6 +16,20 @@ struct DNSString {
     }
 }
 
+extension DNSString {
+    var bytes: [UInt8] {
+        let components = string.split(separator: ".")
+        let bytes = components.flatMap { component -> [UInt8] in
+            guard let bytes = component.data(using: .utf8) else {
+                return []
+            }
+            let count = UInt8(bytes.count)
+            return [ count ] + [UInt8](bytes)
+        } + [0x00]
+        return bytes
+    }
+}
+
 extension DataConsumer {
     mutating func take() throws -> DNSString {
         var segments: [String] = []

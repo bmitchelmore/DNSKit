@@ -8,6 +8,12 @@
 
 import Foundation
 
+extension DataProtocol {
+    var bytes: [UInt8] {
+        return map { $0 }
+    }
+}
+
 extension UInt8 {
     var bits: [Bool] {
         var bits = [Bool](repeating: false, count: 8)
@@ -38,27 +44,3 @@ extension UInt32 {
         }
     }
 }
-
-extension TXTRecord {
-    var bytes: [UInt8] {
-        guard let bytes = string.data(using: .utf8) else {
-            return [ 0x00 ]
-        }
-        let count = UInt8(bytes.count)
-        return [ count ] + [UInt8](bytes)
-    }
-}
-
-extension DNSString {
-    var bytes: [UInt8] {
-        let components = string.split(separator: ".")
-        return components.flatMap { component -> [UInt8] in
-            guard let bytes = component.data(using: .utf8) else {
-                return []
-            }
-            let count = UInt8(bytes.count)
-            return [ count ] + [UInt8](bytes)
-        } + [0x00]
-    }
-}
-

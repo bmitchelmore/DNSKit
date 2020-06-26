@@ -29,15 +29,11 @@ extension CAAData {
 
         let tbytes = tdata.map { $0 }
         let vbytes = vdata.map { $0 }
-        let bytes = try [
+        return try [
             byte.bytes(),
             [UInt8(tbytes.count)],
             tbytes,
             vbytes
-        ].flatMap { $0 }
-        return [
-            UInt16(bytes.count).bytes,
-            bytes
         ].flatMap { $0 }
     }
 }

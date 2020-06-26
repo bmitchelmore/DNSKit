@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		75AA6A04245FA57E00D24B0C /* NSECData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AA6A03245FA57E00D24B0C /* NSECData.swift */; };
+		75AA6A06245FCF6700D24B0C /* DNSNameCompareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AA6A05245FCF6700D24B0C /* DNSNameCompareTests.swift */; };
+		75AA6A08245FD50B00D24B0C /* DNSNameCompare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AA6A07245FD50B00D24B0C /* DNSNameCompare.swift */; };
+		75AA6A0A245FD56200D24B0C /* LevelUpDNSName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AA6A09245FD56200D24B0C /* LevelUpDNSName.swift */; };
+		75AA6A0C245FDE7D00D24B0C /* BytewiseCompare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AA6A0B245FDE7D00D24B0C /* BytewiseCompare.swift */; };
+		75AA6A0E246118BA00D24B0C /* DNSSECValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AA6A0D246118BA00D24B0C /* DNSSECValidation.swift */; };
 		E208AD38245D221C0061857C /* DNSKEYData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E208AD37245D221C0061857C /* DNSKEYData.swift */; };
 		E208AD3A245D25550061857C /* DNSSECAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E208AD39245D25540061857C /* DNSSECAlgorithm.swift */; };
 		E208AD3D245D29BF0061857C /* DNSSECPublicKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E208AD3C245D29BF0061857C /* DNSSECPublicKey.swift */; };
@@ -95,6 +100,11 @@
 
 /* Begin PBXFileReference section */
 		75AA6A03245FA57E00D24B0C /* NSECData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSECData.swift; sourceTree = "<group>"; };
+		75AA6A05245FCF6700D24B0C /* DNSNameCompareTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSNameCompareTests.swift; sourceTree = "<group>"; };
+		75AA6A07245FD50B00D24B0C /* DNSNameCompare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSNameCompare.swift; sourceTree = "<group>"; };
+		75AA6A09245FD56200D24B0C /* LevelUpDNSName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelUpDNSName.swift; sourceTree = "<group>"; };
+		75AA6A0B245FDE7D00D24B0C /* BytewiseCompare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BytewiseCompare.swift; sourceTree = "<group>"; };
+		75AA6A0D246118BA00D24B0C /* DNSSECValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSSECValidation.swift; sourceTree = "<group>"; };
 		E208AD37245D221C0061857C /* DNSKEYData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSKEYData.swift; sourceTree = "<group>"; };
 		E208AD39245D25540061857C /* DNSSECAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSSECAlgorithm.swift; sourceTree = "<group>"; };
 		E208AD3C245D29BF0061857C /* DNSSECPublicKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSSECPublicKey.swift; sourceTree = "<group>"; };
@@ -182,6 +192,7 @@
 				E208AD3E245D396D0061857C /* DSData.swift */,
 				E208AD40245D3A1A0061857C /* DNSSECDigest.swift */,
 				75AA6A03245FA57E00D24B0C /* NSECData.swift */,
+				75AA6A0D246118BA00D24B0C /* DNSSECValidation.swift */,
 			);
 			path = DNSSEC;
 			sourceTree = "<group>";
@@ -236,6 +247,7 @@
 			children = (
 				E212193B2450E966008F8250 /* DNSKitTests.swift */,
 				E212193D2450E966008F8250 /* Info.plist */,
+				75AA6A05245FCF6700D24B0C /* DNSNameCompareTests.swift */,
 			);
 			path = DNSKitTests;
 			sourceTree = "<group>";
@@ -294,6 +306,9 @@
 				E212195E2452414B008F8250 /* DataConsumer.swift */,
 				E212194C24523834008F8250 /* Delayer.swift */,
 				E2121950245238CF008F8250 /* Logger.swift */,
+				75AA6A07245FD50B00D24B0C /* DNSNameCompare.swift */,
+				75AA6A09245FD56200D24B0C /* LevelUpDNSName.swift */,
+				75AA6A0B245FDE7D00D24B0C /* BytewiseCompare.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -462,14 +477,17 @@
 				E2FFC67024569BAD0031A5C6 /* DNSRecordType.swift in Sources */,
 				E21219632452420A008F8250 /* DNSQueue.swift in Sources */,
 				E2FFC67424569BD00031A5C6 /* ResourceRecordData.swift in Sources */,
+				75AA6A08245FD50B00D24B0C /* DNSNameCompare.swift in Sources */,
 				E2FFC69D245BB3950031A5C6 /* RRSIGData.swift in Sources */,
 				75AA6A04245FA57E00D24B0C /* NSECData.swift in Sources */,
 				E2121959245240E8008F8250 /* Hex.swift in Sources */,
 				E2FFC6822456A0A00031A5C6 /* BytePackage.swift in Sources */,
+				75AA6A0E246118BA00D24B0C /* DNSSECValidation.swift in Sources */,
 				E212194F245238A3008F8250 /* NetworkOrderBytes.swift in Sources */,
 				E21219552452395F008F8250 /* DNSError.swift in Sources */,
 				E2FFC67A24569BFE0031A5C6 /* ResourceRecord.swift in Sources */,
 				E2FFC67624569BE40031A5C6 /* QuestionSection.swift in Sources */,
+				75AA6A0A245FD56200D24B0C /* LevelUpDNSName.swift in Sources */,
 				E2FFC6862456A7C20031A5C6 /* SOAData.swift in Sources */,
 				E208AD38245D221C0061857C /* DNSKEYData.swift in Sources */,
 				E2FFC67E24569C250031A5C6 /* DNSRequest.swift in Sources */,
@@ -483,6 +501,7 @@
 				E212195D24524134008F8250 /* Bytes.swift in Sources */,
 				E212195B245240F8008F8250 /* Random.swift in Sources */,
 				E2FFC67224569BBD0031A5C6 /* DNSRecordClass.swift in Sources */,
+				75AA6A0C245FDE7D00D24B0C /* BytewiseCompare.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,6 +509,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75AA6A06245FCF6700D24B0C /* DNSNameCompareTests.swift in Sources */,
 				E212193C2450E966008F8250 /* DNSKitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

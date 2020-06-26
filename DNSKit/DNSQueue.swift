@@ -45,7 +45,7 @@ final class DNSQueue {
         listenerQueue.async { [weak self, logger] () in
             guard let self = self else { return }
             self.sem.wait()
-            logger.verbose("Listening for messages")
+//            logger.verbose("Listening for messages")
             self.connection.receiveMessage { [weak self, logger] (data, context, finished, error) in
                 if let error = error {
                     logger.error(error, "Failed to receive message!")
@@ -57,7 +57,7 @@ final class DNSQueue {
                         if let value = self.handlers[response.header.id] {
                             handler = value
                         }
-                        logger.debug("Received response for Query \(response.header.id.hex): \(data.bytesTotal) bytes")
+//                        logger.debug("Received response for Query \(response.header.id.hex): \(data.bytesTotal) bytes")
                         handler?(.success(response))
                     } catch DNSParseError.invalidResponse(let id, let error) {
                         if let value = self.handlers[id] {
@@ -93,7 +93,7 @@ final class DNSQueue {
                 finish(result)
             }
             connection.send(content: Data(bytes), completion: .contentProcessed { [weak self, logger] (error) in
-                logger.debug("Query \(request.header.id.hex) \(request.questions) Sent To Resolver")
+//                logger.debug("Query \(request.header.id.hex) \(request.questions) Sent To Resolver")
                 self?.sem.signal()
             })
         } catch {

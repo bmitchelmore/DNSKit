@@ -46,13 +46,9 @@ extension NSECData {
         return bytes
     }
     func bytes() throws -> [UInt8] {
-        let bytes: [UInt8] = try [
+        return try [
             DNSString(name).bytes,
             typesBytes()
-        ].flatMap { $0 }
-        return [
-            UInt16(bytes.count).bytes,
-            bytes
         ].flatMap { $0 }
     }
 }
@@ -66,7 +62,6 @@ extension DataConsumer {
             repeat {
                 let window: UInt8 = try consumer.take()
                 let size: UInt8 = try consumer.take()
-                let bytes: Data = try consumer.peek(size)
                 for i in 0..<size*8 {
                     let isSet: Bool = try consumer.take()
                     guard isSet else {

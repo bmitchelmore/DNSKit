@@ -43,32 +43,36 @@ func wait() {
 if let resolver = Resolvers().all.last {
     dns.use(resolver)
 
-    query(.a("google.com")) { (result) in
-        log("Google A", result)
-    }
-
-    query(.aaaa("google.com")) { (result) in
-        log("Google AAAA", result)
-    }
-
-    query(.txt("google.com")) { (result) in
-        log("Google TXT", result)
-    }
-
-    query(.srv("gmail.com", .imaps, .tcp)) { (result) in
-        log("Gmail IMAPS TCP SRV", result)
-    }
-
-    if let ip = IPv4Address("8.8.8.8") {
-        query(.ptr(ip)) { (result) in
-            log("Google DNS IPv4 PTR", result)
-        }
-    }
-
-    if let ip = IPv6Address("2001:4860:4860::8888") {
-        query(.ptr(ip)) { (result) in
-            log("Google DNS IPv6 PTR", result)
-        }
+//    query(.a("google.com")) { (result) in
+//        log("Google A", result)
+//    }
+//
+//    query(.aaaa("google.com")) { (result) in
+//        log("Google AAAA", result)
+//    }
+//
+//    query(.txt("google.com")) { (result) in
+//        log("Google TXT", result)
+//    }
+//
+//    query(.srv("gmail.com", .imaps, .tcp)) { (result) in
+//        log("Gmail IMAPS TCP SRV", result)
+//    }
+//
+//    if let ip = IPv4Address("8.8.8.8") {
+//        query(.ptr(ip)) { (result) in
+//            log("Google DNS IPv4 PTR", result)
+//        }
+//    }
+//
+//    if let ip = IPv6Address("2001:4860:4860::8888") {
+//        query(.ptr(ip)) { (result) in
+//            log("Google DNS IPv6 PTR", result)
+//        }
+//    }
+    
+    query(.a("cloudflare.com"), validating: true) { (result) in
+        log("Cloudflare DNSSEC", result)
     }
 } else {
     print("No Resolvers Found????")

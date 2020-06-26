@@ -20,7 +20,7 @@ public struct SOAData: Hashable {
 
 extension SOAData {
     var bytes: [UInt8] {
-        let bytes = [
+        return [
             DNSString(mname).bytes,
             DNSString(rname).bytes,
             serial.bytes,
@@ -28,10 +28,6 @@ extension SOAData {
             retry.bytes,
             expire.bytes,
             ttl.bytes
-        ].flatMap { $0 }
-        return [
-            UInt16(bytes.count).bytes,
-            bytes
         ].flatMap { $0 }
     }
 }

@@ -29,7 +29,7 @@ extension Date {
 
 extension RRSIGData {
     var bytes: [UInt8] {
-        let bytes = [
+        return [
             type.rawValue.bytes,
             [algorithm.rawValue, labels],
             ttl.bytes,
@@ -38,10 +38,6 @@ extension RRSIGData {
             tag.bytes,
             DNSString(signer).bytes,
             signature.map { $0 }
-        ].flatMap { $0 }
-        return [
-            UInt16(bytes.count).bytes,
-            bytes
         ].flatMap { $0 }
     }
 }

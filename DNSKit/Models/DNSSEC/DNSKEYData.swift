@@ -8,6 +8,15 @@
 
 import Foundation
 
+func CalculateKeyTag(_ data: Data) -> UInt16 {
+    var value: UInt32 = 0
+    for i in 0..<data.count {
+        value += (i & 0x1 == 0x1) ? UInt32(data[i]) : UInt32(data[i]) << 8
+    }
+    value += (value >> 16) & 0xffff
+    return UInt16(value & 0xffff)
+}
+
 public struct DNSKEYData: Hashable {
     var zk: Bool
     var revoked: Bool
@@ -15,6 +24,7 @@ public struct DNSKEYData: Hashable {
     var proto: UInt8
     var alg: DNSSECAlgorithm
     var pk: DNSSECPublicKey
+    var tag: UInt16
 }
 
 extension DNSKEYData {
@@ -26,14 +36,10 @@ extension DNSKEYData {
             .bits(value: 0, count: 6),
             .bit(sep)
         ]
-        let bytes: [UInt8] = try [
+        return try [
             flag.bytes(),
             [proto, alg.rawValue],
             pk.bytes
-        ].flatMap { $0 }
-        return [
-            UInt16(bytes.count).bytes,
-            bytes
         ].flatMap { $0 }
     }
 }
@@ -41,6 +47,7 @@ extension DNSKEYData {
 extension DataConsumer {
     mutating func take() throws -> DNSKEYData {
         let len: UInt16 = try take()
+        let tag: UInt16 = CalculateKeyTag(try peek(len))
         return try take(len) { consumer in
             try consumer.drop(bits: 7)
             let zk: Bool = try consumer.take()
@@ -48,7 +55,7 @@ extension DataConsumer {
             try consumer.drop(bits: 6)
             let sep: Bool = try consumer.take()
             let proto: UInt8 = try consumer.take()
-            let alg: DNSSECAlgorithm = try consumer.take(or: DNSParseError.invalidAlgorithm) { DNSSECAlgorithm(rawValue: $0) }
+            let alg: DNSSECAlgorithm = try consumer.take()
             let pk: DNSSECPublicKey = try consumer.take(for: alg)
             return DNSKEYData(
                 zk: zk,
@@ -56,7 +63,8 @@ extension DataConsumer {
                 sep: sep,
                 proto: proto,
                 alg: alg,
-                pk: pk
+                pk: pk,
+                tag: tag
             )
         }
     }

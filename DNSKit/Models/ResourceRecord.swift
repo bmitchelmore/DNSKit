@@ -10,10 +10,10 @@ import Foundation
 import Network
 
 public struct ResourceRecord: Hashable {
-    public let `class`: DNSRecordClass
-    public let name: String
-    public let ttl: UInt32
-    public let data: ResourceRecordData
+    public var `class`: DNSRecordClass
+    public var name: String
+    public var ttl: UInt32
+    public var data: ResourceRecordData
 }
 
 extension ResourceRecord {
@@ -84,7 +84,7 @@ extension DataConsumer {
                 data: .unknown(typeId)
             )
         }
-        logger.debug("Reading \(type) record (\(typeId)) for \(name.string): \(data[offset...].hex)")
+//        logger.debug("Reading \(type) record (\(typeId)) for \(name.string): \(data[offset...].hex)")
         if type == .opt {
             // OPT records are a special case
             // that has a weird binary format

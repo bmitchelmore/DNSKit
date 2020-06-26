@@ -16,6 +16,16 @@ struct TXTRecord {
     }
 }
 
+extension TXTRecord {
+    var bytes: [UInt8] {
+        guard let bytes = string.data(using: .utf8) else {
+            return [ 0x00 ]
+        }
+        let count = UInt8(bytes.count)
+        return [ count ] + [UInt8](bytes)
+    }
+}
+
 extension DataConsumer {
     mutating func take() throws -> TXTRecord {
         let len: UInt8 = try take()

@@ -19,15 +19,11 @@ public struct SRVData: Hashable {
 
 extension SRVData {
     var bytes: [UInt8] {
-        let bytes = [
+        return [
             priority.bytes,
             weight.bytes,
             port.bytes,
             DNSString(target).bytes
-        ].flatMap { $0 }
-        return [
-            UInt16(bytes.count).bytes,
-            bytes
         ].flatMap { $0 }
     }
 }

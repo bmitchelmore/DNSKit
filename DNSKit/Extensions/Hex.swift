@@ -9,25 +9,13 @@
 import Foundation
 
 private let hexDigits = Array(Array("0123456789abcdef".utf16)[0...])
-extension Data {
+extension DataProtocol {
     var hex: String {
         var chars: [Unicode.UTF16.CodeUnit] = []
         chars.reserveCapacity(2 * count)
         for byte in self {
             chars.append(hexDigits[Int(byte >> 4)])
             chars.append(hexDigits[Int(byte & 15)])
-        }
-        return String(utf16CodeUnits: chars, count: chars.count)
-    }
-}
-
-extension Array where Element == UInt8 {
-    var hex: String {
-        var chars: [Unicode.UTF16.CodeUnit] = []
-        chars.reserveCapacity(2 * count)
-        for c in self {
-            chars.append(hexDigits[Int(c >> 4)])
-            chars.append(hexDigits[Int(c & 15)])
         }
         return String(utf16CodeUnits: chars, count: chars.count)
     }
